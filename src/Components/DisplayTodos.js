@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTodos } from "../Redux/todoSlice";
 import TodoItem from "./TodoItem";
 
 const DisplayTodos = () => {
   const [sort, setSort] = useState("active");
+  const dispatch = useDispatch();
+
   const items = useSelector((state) => state.todos.todos);
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
   return (
     <div>
       <div className="buttons">

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { GoPlus } from "react-icons/go";
-import { fetchTodos, addTodo } from "../Redux/todoSlice";
+import { addTodo } from "../Redux/todoSlice";
 import { motion } from "framer-motion";
 import TodoItem from "./TodoItem";
 const Todos = () => {
@@ -20,9 +20,6 @@ const Todos = () => {
     }
     setTodo("");
   };
-  useEffect(() => {
-    dispatch(fetchTodos());
-  }, [dispatch]);
 
   return (
     <div>
