@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { nanoid } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 import { GoPlus } from "react-icons/go";
-import { addTodo } from "../Redux/todoSlice";
+import { AiFillBulb } from "react-icons/ai";
 import { motion } from "framer-motion";
-import TodoItem from "./TodoItem";
-const Todos = () => {
-  const dispatch = useDispatch();
+
+const Todos = ({ fetchData, items, setItems, addTodo }) => {
   const [todo, setTodo] = useState("");
+
+  useEffect(() => {
+    fetchData();
+  }, [todo]);
 
   const handleChange = (e) => {
     setTodo(e.target.value);
@@ -16,33 +18,39 @@ const Todos = () => {
     if (todo.length <= 3) {
       alert("Input must be high three");
     } else {
-      dispatch(addTodo({ content: todo, isCompleted: false, id: nanoid() }));
+      addTodo({ content: todo, isCompleted: false, id: nanoid() });
     }
     setTodo("");
+    fetchData();
   };
 
   return (
-    <div>
-      {" "}
-      <div className="addTodos">
-        <input
-          type="text"
-          className="todo-input"
-          onChange={(e) => handleChange(e)}
-          value={todo}
-        />
+    <div className="addTodos">
+      <motion.button
+        style={{ marginRight: "1rem" }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="add-btn"
+        // onClick={(e) => toggleDark(e)}
+      >
+        <AiFillBulb />
+      </motion.button>
+      <input
+        type="text"
+        className="todo-input"
+        onChange={(e) => handleChange(e)}
+        value={todo}
+      />
 
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="add-btn"
-          onClick={() => add()}
-        >
-          <GoPlus />
-        </motion.button>
-        <br />
-        <TodoItem />
-      </div>
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="add-btn"
+        onClick={() => add()}
+      >
+        <GoPlus />
+      </motion.button>
+      <br />
     </div>
   );
 };

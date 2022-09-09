@@ -1,10 +1,29 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Todos from "./Components/Todos";
 import DisplayTodos from "./Components/DisplayTodos";
-
+import axios from "axios";
 import "./App.css";
-
+const bodyStyle = document.querySelector("body");
 function App() {
+  const [items, setItems] = useState([]);
+  const defaultTheme = localStorage.getItem("theme");
+
+  useEffect(() => {
+    defaultTheme === "dark"
+      ? bodyStyle.classList.add("dark")
+      : bodyStyle.classList.remove("dark");
+  }, [defaultTheme]);
+
+  const fetchData = () => {
+    axios
+      .get("https://6319b8d48e51a64d2beaaef3.mockapi.io/todos")
+      .then((res) => setItems(res.data));
+  };
+  const addTodo = async (data) => {
+    await axios.post("https://6319b8d48e51a64d2beaaef3.mockapi.io/todos", data);
+  };
+
   return (
     <div className="App">
       <motion.h1
@@ -20,8 +39,13 @@ function App() {
         animate={{ y: 0 }}
         transition={{ type: "spring", duration: 1 }}
       >
-        <Todos />
-        <DisplayTodos />
+        <Todos
+          fetchData={fetchData}
+          items={items}
+          setItems={setItems}
+          addTodo={addTodo}
+        />
+        <DisplayTodos fetchData={fetchData} items={items} setItems={setItems} />
       </motion.div>
     </div>
   );
