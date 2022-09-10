@@ -4,14 +4,21 @@ import { GoPlus } from "react-icons/go";
 import { motion } from "framer-motion";
 
 const PopupName = ({ setName }) => {
+  //UseState definitions
+
   const [nameValue, setNameValue] = useState("");
+
+  //Save name input in this functions
   const handleChange = (e) => {
     setNameValue(e.target.value);
   };
+
+  //Save name in localstorage
   const addName = () => {
     setName(nameValue);
     localStorage.setItem("name", nameValue);
   };
+
   return (
     <div className="addTodos">
       <motion.h3

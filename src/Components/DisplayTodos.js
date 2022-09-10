@@ -4,8 +4,10 @@ import axios from "axios";
 import TodoItem from "./TodoItem";
 
 const DisplayTodos = ({ items, setItems, fetchData }) => {
+  //UseState definitions
   const [sort, setSort] = useState("active");
 
+  //Put Todo that changed Todo at API using PUT request
   const updateTodo = (id, newContent, e) => {
     const todo = axios
       .get(`https://6319b8d48e51a64d2beaaef3.mockapi.io/todos/${id}`)
@@ -17,8 +19,8 @@ const DisplayTodos = ({ items, setItems, fetchData }) => {
     });
   };
 
+  //Change Complete state using this PUT request in this functions
   const completeTodo = (id) => {
-    console.log("içeride");
     const todo = axios
       .get(`https://6319b8d48e51a64d2beaaef3.mockapi.io/todos/${id}`)
       .then((res) => res.data);
@@ -31,11 +33,14 @@ const DisplayTodos = ({ items, setItems, fetchData }) => {
       .then(() => fetchData());
   };
 
+  //Delete item
   const removeItem = async (id) => {
     await axios
       .delete(`https://6319b8d48e51a64d2beaaef3.mockapi.io/todos/${id}`)
       .then(() => fetchData());
   };
+
+  //Get Todo list that changed Todos List in this useEffect
   useEffect(() => {
     axios
       .get("https://6319b8d48e51a64d2beaaef3.mockapi.io/todos")
@@ -44,6 +49,7 @@ const DisplayTodos = ({ items, setItems, fetchData }) => {
 
   return (
     <div className="displaytodos">
+      {/* Filter Buttons */}
       <div className="buttons">
         <motion.button
           whileHover={{ scale: 1.1 }}

@@ -4,12 +4,15 @@ import { IoCheckmarkDoneSharp, IoClose } from "react-icons/io5";
 import { motion } from "framer-motion";
 
 const TodoItem = ({ item, removeItem, completeTodo, updateTodo }) => {
+  //Using in edit item control
   const inputRef = useRef(true);
 
+  //Undisable Todo Section that wanted to be changed todo
   const changeFocus = () => {
     inputRef.current.disabled = false;
     inputRef.current.focus();
   };
+
   return (
     <div>
       <motion.li

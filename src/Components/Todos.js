@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { nanoid } from "@reduxjs/toolkit";
 import { GoPlus } from "react-icons/go";
 import { AiFillBulb } from "react-icons/ai";
-import { motion } from "framer-motion";
 
 const Todos = ({ fetchData, items, setItems, addTodo, toggleDark }) => {
+  //UseState definitions
   const [todo, setTodo] = useState("");
 
+  //When Page is opened , Get Todos using fetchData() functions
   useEffect(() => {
     fetchData();
   }, [todo]);
 
+  //Save new todo in this functions
   const handleChange = (e) => {
     setTodo(e.target.value);
   };
+
+  //New Todo check requirement and Post API using addTodo() function
   const add = () => {
     if (todo.length <= 3) {
       alert("Input must be high three");
