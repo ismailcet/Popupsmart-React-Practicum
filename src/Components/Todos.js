@@ -4,7 +4,7 @@ import { GoPlus } from "react-icons/go";
 import { AiFillBulb } from "react-icons/ai";
 import { motion } from "framer-motion";
 
-const Todos = ({ fetchData, items, setItems, addTodo }) => {
+const Todos = ({ fetchData, items, setItems, addTodo, toggleDark }) => {
   const [todo, setTodo] = useState("");
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Todos = ({ fetchData, items, setItems, addTodo }) => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="add-btn"
-        // onClick={(e) => toggleDark(e)}
+        onClick={(e) => toggleDark()}
       >
         <AiFillBulb />
       </motion.button>

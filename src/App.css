@@ -61,15 +61,23 @@ body {
   text-align: center;
   margin-bottom: 2rem;
   color: #e1ebfd;
-
   text-shadow: 0 0 5px #433aa8, 3px -1px 5px #271c6c;
 }
 
 .addTodos {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
-
+.addTodos h3 {
+  display: inline;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  color: #e1ebfd;
+  text-shadow: 0 0 5px #433aa8, 3px -1px 5px #271c6c;
+  align-content: center;
+}
 .todo-input {
   min-width: 15rem;
   width: 40vw;
